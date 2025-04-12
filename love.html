@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我也喜欢你！</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffcce6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* 漂浮的爱心背景 */
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 105, 180, 0.3);
+            font-size: 20px;
+            z-index: -1;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .together-image {
+            max-height: 70vh;
+            max-width: 100%;
+            object-fit: contain;
+            margin-bottom: 2rem;
+        }
+        
+        .message {
+            font-size: 2.5rem;
+            color: #ff69b4;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .heart {
+            display: inline-block;
+            color: #ff69b4;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="images/love.jpg" alt="千早爱音和长崎素世" class="together-image">
+        <div class="message">soyorin，love<span class="heart">♡</span>～我也喜欢你</div>
+    </div>
+
+    <script>
+        // 创建漂浮的爱心背景
+        function createFloatingHearts() {
+            const heartSymbols = ['♥', '♡', '❤', '💕', '💗', '💓'];
+            const numHearts = 30; // 爱心数量
+            
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                
+                // 随机选择爱心符号
+                const randomSymbol = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.innerHTML = randomSymbol;
+                
+                // 随机大小
+                const size = Math.floor(Math.random() * 30) + 10;
+                heart.style.fontSize = `${size}px`;
+                
+                // 随机位置
+                const left = Math.floor(Math.random() * 100);
+                heart.style.left = `${left}%`;
+                heart.style.bottom = '-20px';
+                
+                // 随机透明度
+                const opacity = (Math.random() * 0.4) + 0.1;
+                heart.style.color = `rgba(255, 105, 180, ${opacity})`;
+                
+                // 随机动画持续时间
+                const duration = Math.floor(Math.random() * 20) + 10;
+                heart.style.animationDuration = `${duration}s`;
+                
+                document.body.appendChild(heart);
+            }
+        }
+        
+        // 页面加载完成后创建爱心
+        document.addEventListener('DOMContentLoaded', createFloatingHearts);
+    </script>
+</body>
+</html>

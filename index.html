@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>喜欢我吗？</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffcce6; /* 粉色背景 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            height: 80vh;
+        }
+        
+        .character {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .character img {
+            max-height: 80vh;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        
+        .content {
+            position: absolute;
+            bottom: 10%;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .message {
+            font-size: 2rem;
+            color: #ff69b4;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-like {
+            background-color: #ff69b4;
+            color: white;
+        }
+        
+        .btn-dislike {
+            background-color: #8b4513;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="character left">
+            <img src="images/anon.JPG" alt="千早爱音">
+        </div>
+        <div class="character right">
+            <img src="images/soyorin.PNG" alt="长崎素世">
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="message">呐呐，soyorin你喜欢我吗</div>
+        <div class="buttons">
+            <button class="btn btn-like" id="likeBtn">喜欢</button>
+            <button class="btn btn-dislike" id="dislikeBtn">不喜欢</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeBtn = document.getElementById('likeBtn');
+            const dislikeBtn = document.getElementById('dislikeBtn');
+            let clickCount = 0;
+            
+            // 点击喜欢按钮
+            likeBtn.addEventListener('click', function() {
+                window.location.href = 'love.html';
+            });
+            
+            // 点击不喜欢按钮
+            dislikeBtn.addEventListener('click', function() {
+                clickCount++;
+                
+                // 不喜欢按钮变小，喜欢按钮变大
+                const currentDislikeWidth = parseFloat(window.getComputedStyle(dislikeBtn).width);
+                const currentLikeWidth = parseFloat(window.getComputedStyle(likeBtn).width);
+                
+                dislikeBtn.style.width = (currentDislikeWidth * 0.8) + 'px';
+                dislikeBtn.style.fontSize = (parseFloat(window.getComputedStyle(dislikeBtn).fontSize) * 0.8) + 'px';
+                
+                likeBtn.style.width = (currentLikeWidth * 1.2) + 'px';
+                likeBtn.style.fontSize = (parseFloat(window.getComputedStyle(likeBtn).fontSize) * 1.2) + 'px';
+                
+                // 如果点击了六次，隐藏不喜欢按钮
+                if (clickCount >= 6) {
+                    dislikeBtn.style.display = 'none';
+                    likeBtn.style.width = '300px';
+                    likeBtn.style.fontSize = '2rem';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
